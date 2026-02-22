@@ -1,42 +1,22 @@
-﻿# retag-arch
+# Retag - Architecture Documentation
 
-Repositório de arquitetura do sistema de precificação para brechó ("RETAG").
+Este repositório contém a documentação arquitetural
+do sistema **Retag - Simulador de Preços para Brechós**.
 
-## Contexto
-Este repositório documenta a visão arquitetural de uma solução com:
-- `FrontEnd` em Next.js para experiência do usuário e consumo de API.
-- `BackEnd` em NestJS para autenticação, regras de precificação com IA e persistência.
-- `MySQL` para dados de usuários, itens e simulações de visitantes.
-- Integrações externas com OpenAI (sugestão de preço), Google OAuth2 (login social) e Resend (reset de senha).
+A arquitetura está documentada em níveis:
+- **Context Diagram** – visão de alto nível do sistema
+- **Container Diagram** – fronteiras e contêineres
+- **Decisões arquiteturais** (ADRs)
+- **Modelos de dados / ER**
 
-Objetivo funcional:
-- Simular preço sugerido para itens de brechó.
-- Permitir fluxo completo de gestão de itens (criar, listar, editar, excluir e marcar como vendido) para usuários autenticados.
-- Oferecer simulação limitada para visitantes.
+### 📂 Estrutura
 
-## O que existe neste repositório
-- `DOCS/ARCHITECTURE.md`: descrição detalhada da arquitetura, módulos, regras de negócio, contratos de API e riscos.
-- `DOCS/ARCHITECTURE-C4-CONTEXT.mmd`: diagrama C4 de contexto.
-- `DOCS/ARCHITECTURE-C4-CONTAINERS.mmd`: diagrama C4 de containers.
-- `DOCS/DIAGRAMA_ER.png`: diagrama entidade-relacionamento.
+- `docs/architecture.md` – Descrição da arquitetura
+- `docs/c4-context.mmd` – C4 Context (Mermaid)
+- `docs/c4-container.mmd` – C4 Container (Mermaid)
+- `docs/er-diagram.png` – ER do banco de dados
+- `docs/adr/` – Architecture Decision Records
 
-## Fluxo arquitetural resumido
-1. Usuário acessa o FrontEnd via navegador.
-2. FrontEnd chama a API BackEnd por HTTPS com JWT quando necessário.
-3. BackEnd aplica regras de autenticação e precificação.
-4. BackEnd consulta OpenAI para sugestão de preço e racional.
-5. BackEnd persiste e consulta dados no MySQL.
-
-## Principais decisões de arquitetura
-- Separação clara entre camadas de interface e regras de negócio.
-- API stateless com autenticação JWT Bearer.
-- Regras de precificação centralizadas no BackEnd (evita lógica crítica no cliente).
-- Integrações externas encapsuladas na API.
-
-## Como usar este repositório
-1. Comece por `DOCS/ARCHITECTURE.md` para entender o desenho completo.
-2. Consulte os arquivos `.mmd` para visão C4.
-3. Use o `DIAGRAMA_ER.png` para entender o modelo de dados.
-
-## Escopo
-Este repositório foca em arquitetura e documentação. A implementação de código (FrontEnd/BackEnd) é tratada nos respectivos projetos de aplicação.
+### 📌 Como visualizar
+Você pode ver os diagramas diretamente no GitHub via renderização Mermaid
+ou usando ferramentas como **Mermaid Live Editor**.
