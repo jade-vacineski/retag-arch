@@ -1,0 +1,21 @@
+﻿C4Context
+    title Brecho Pricing - C4 Contexto
+    Person(user, "Usuario", "Pessoa que simula e gerencia precos de itens")
+
+    System_Boundary(s1, "Brecho Pricing") {
+        System(fe, "FrontEnd", "Next.js", "Interface web para simulacao e gestao")
+        System(be, "BackEnd API", "NestJS", "Autenticacao, precificacao e persistencia")
+    }
+
+    SystemDb(db, "MySQL", "Persistencia de usuarios, itens e simulacoes")
+    System_Ext(openai, "OpenAI Responses API", "Sugestao de preco e racional")
+    System_Ext(google, "Google OAuth2", "Login social")
+    System_Ext(resend, "Resend API", "Envio de email de reset")
+
+    Rel_D(user, fe, "Usa via navegador", "HTTPS")
+    Rel_D(fe, be, "Consome API", "JSON/HTTPS + JWT")
+
+    Rel_L(be, db, "Le e escreve dados", "SQL")
+    Rel_R(be, openai, "Solicita sugestao de preco", "HTTPS")
+    Rel_R(be, google, "Processa OAuth", "OAuth2")
+    Rel_R(be, resend, "Envia recuperacao de senha", "HTTPS")

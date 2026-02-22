@@ -1,0 +1,21 @@
+﻿C4Container
+    title Brecho Pricing - C4 Containers 
+    Person(user, "Usuario", "Pessoa que simula e gerencia precos de itens")
+
+    System_Boundary(s1, "Brecho Pricing") {
+        Container(fe, "FrontEnd", "Next.js (App Router)", "UI, gerenciamento de sessão e consumo da API")
+        Container(be, "BackEnd API", "NestJS", "Auth, regras de precificacao e CRUD de itens")
+        ContainerDb(db, "Banco de Dados", "MySQL", "users, items, guest_price_simulations")
+    }
+
+    System_Ext(openai, "OpenAI Responses API", "Sugestao de preco e racional")
+    System_Ext(google, "Google OAuth2", "Login social")
+    System_Ext(resend, "Resend API", "Envio de email de reset")
+
+    Rel_D(user, fe, "Usa via navegador", "HTTPS")
+    Rel_D(fe, be, "Chama endpoints REST", "JSON/HTTPS + JWT")
+
+    Rel_L(be, db, "Le e escreve dados", "Knex/SQL")
+    Rel_R(be, openai, "Solicita sugestao de preco", "HTTPS")
+    Rel_R(be, google, "Processa OAuth", "OAuth2")
+    Rel_R(be, resend, "Envia recuperacao", "HTTPS")
