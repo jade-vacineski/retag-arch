@@ -2,7 +2,7 @@
 
 ## 1. Visão geral
 Este repositório segue uma arquitetura em 2 aplicações principais:
-- `FrontEnd`: aplicação web em Next.js (App Router), responsável por UX, autenticação no navegador e consumo da API.
+- `FrontEnd`: aplicação web em Next.js (App Router), responsável por UX, gerenciamento de sessão no cliente e consumo da API.
 - `BackEnd`: API REST em NestJS, responsável por autenticação, regras de precificação com IA e persistência em MySQL via Knex.
 
 Objetivo do sistema:
@@ -10,23 +10,15 @@ Objetivo do sistema:
 - Permitir salvar, listar, editar, excluir e marcar itens como vendidos.
 - Suportar usuários autenticados e uma simulação limitada para visitantes.
 
-## 2. Arquitetura lógica (containers)
+## 2. Modelo Arquitetural (C4)
+### 2.1 Context Diagram
+- Arquivo: `DOCS/ARCHITECTURE-C4-CONTEXT.mmd`
 
-```text
-[Browser / Next.js FrontEnd]
-        |
-        | HTTPS (JSON + JWT Bearer)
-        v
-[NestJS API BackEnd]
-   |            |
-   |            +--> [OpenAI Responses API] (sugestão de preço)
-   |
-   +--> [MySQL] (users, items, guest_price_simulations)
+### 2.2 Container Diagram
+- Arquivo: `DOCS/ARCHITECTURE-C4-CONTAINERS.mmd`
 
-Fluxos auxiliares:
-BackEnd -> Resend API (opcional) para reset de senha
-BackEnd -> Google OAuth2 para login social
-```
+### 2.3 Deployment Diagram
+- Arquivo: `DOCS/ARCHITECTURE-C4-DEPLOYMENT.mmd`
 
 ## 3. FrontEnd (Next.js)
 

@@ -18,6 +18,7 @@ Objetivo funcional:
 - `DOCS/ARCHITECTURE.md`: descrição detalhada da arquitetura, módulos, regras de negócio, contratos de API e riscos.
 - `DOCS/ARCHITECTURE-C4-CONTEXT.mmd`: diagrama C4 de contexto.
 - `DOCS/ARCHITECTURE-C4-CONTAINERS.mmd`: diagrama C4 de containers.
+- `DOCS/ARCHITECTURE-C4-DEPLOYMENT.mmd`: diagrama C4 de deployment (implantação).
 - `DOCS/DIAGRAMA_ER.png`: diagrama entidade-relacionamento.
 
 ## Fluxo arquitetural resumido
@@ -35,7 +36,7 @@ Objetivo funcional:
 
 ## Como usar este repositório
 1. Comece por `DOCS/ARCHITECTURE.md` para entender o desenho completo.
-2. Consulte os arquivos `.mmd` para visão C4.
+2. Consulte os arquivos `.mmd` para visão C4 (Context, Containers e Deployment).
 3. Use o `DIAGRAMA_ER.png` para entender o modelo de dados.
 
 ## Escopo
