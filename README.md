@@ -1,6 +1,6 @@
 ﻿# retag-arch
 
-Repositório de arquitetura do sistema de precificação para brechó ("Brechó Pricing").
+Repositório de arquitetura do sistema de precificação para brechó ("RETAG").
 
 ## Contexto
 Este repositório documenta a visão arquitetural de uma solução com:
