@@ -1,18 +1,15 @@
-﻿# retag-arch
+# Retag - Architecture Documentation
 
-Repositório de arquitetura do sistema de precificação para brechó ("Brechó Pricing").
+Este repositório contém a documentação arquitetural
+do sistema **Retag - Simulador de Preços para Brechós**.
 
-## Contexto
-Este repositório documenta a visão arquitetural de uma solução com:
-- `FrontEnd` em Next.js para experiência do usuário e consumo de API.
-- `BackEnd` em NestJS para autenticação, regras de precificação com IA e persistência.
-- `MySQL` para dados de usuários, itens e simulações de visitantes.
-- Integrações externas com OpenAI (sugestão de preço), Google OAuth2 (login social) e Resend (reset de senha).
+A arquitetura está documentada em níveis:
+- **Context Diagram** – visão de alto nível do sistema
+- **Container Diagram** – fronteiras e contêineres
+- **Decisões arquiteturais** (ADRs)
+- **Modelos de dados / ER**
 
-Objetivo funcional:
-- Simular preço sugerido para itens de brechó.
-- Permitir fluxo completo de gestão de itens (criar, listar, editar, excluir e marcar como vendido) para usuários autenticados.
-- Oferecer simulação limitada para visitantes.
+### 📂 Estrutura
 
 ## O que existe neste repositório
 - `DOCS/ARCHITECTURE.md`: descrição detalhada da arquitetura, módulos, regras de negócio, contratos de API e riscos.
