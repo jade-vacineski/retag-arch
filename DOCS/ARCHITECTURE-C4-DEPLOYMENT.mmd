@@ -1,27 +1,27 @@
 ﻿C4Deployment
     title Retag - Deployment Diagram (Production)
 
-    Deployment_Node(browser, "User Browser", "Chrome / Edge / Safari") {
-        Container(client, "Next.js App (Client)", "Executado no navegador")
+    Deployment_Node(browser_node, "User Browser", "Chrome / Edge / Safari", "Cliente web") {
+        Container(client, "Next.js App (Client)", "Next.js + React", "Executado no navegador")
     }
 
-    Deployment_Node(vercel, "Vercel", "Edge Network + Serverless") {
-        Container(fe, "Frontend", "Next.js + React + TypeScript")
+    Deployment_Node(vercel, "Vercel", "Edge Network + Serverless", "Hospedagem do FrontEnd") {
+        Container(fe, "Frontend", "Next.js + React + TypeScript", "Entrega da aplicação web")
     }
 
-    Deployment_Node(render, "Render", "Node.js Runtime") {
-        Container(be, "Backend API", "NestJS")
+    Deployment_Node(render, "Render", "Node.js Runtime", "Hospedagem do BackEnd") {
+        Container(be, "Backend API", "NestJS", "API REST e regras de negócio")
     }
 
-    Deployment_Node(gcp, "Google Cloud", "Managed Infrastructure") {
-        ContainerDb(db, "MySQL Database", "MySQL (Cloud Managed)")
+    Deployment_Node(gcp, "Google Cloud", "Managed Infrastructure", "Camada de dados") {
+        ContainerDb(db, "MySQL Database", "MySQL (Cloud Managed)", "Persistência relacional")
     }
 
     System_Ext(openai, "OpenAI API", "IA para sugestão de preço")
     System_Ext(google, "Google OAuth2", "Autenticação social")
     System_Ext(resend, "Resend API", "Envio de e-mails")
 
-    Rel(browser, fe, "HTTPS")
+    Rel(client, fe, "HTTPS")
     Rel(fe, be, "HTTPS (REST + JWT)")
     Rel(be, db, "SSL/TCP 3306")
     Rel(be, openai, "HTTPS")
