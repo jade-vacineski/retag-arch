@@ -6,7 +6,6 @@ do sistema **Retag - Simulador de Preços para Brechós**.
 A arquitetura está documentada em níveis:
 - **Context Diagram** – visão de alto nível do sistema
 - **Container Diagram** – fronteiras e contêineres
-- **Decisões arquiteturais** (ADRs)
 - **Modelos de dados / ER**
 
 ### 📂 Estrutura
