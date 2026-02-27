@@ -1,21 +1,27 @@
 ﻿C4Container
-    title Retag- C4 Containers 
-    Person(user, "Usuario", "Pessoa que simula e gerencia precos de itens")
+    title Retag - C4 Containers
 
-    System_Boundary(s1, "Brecho Pricing") {
+    Person(user, "Usuário", "Pessoa que simula e gerencia preços de itens")
+
+    System_Ext(cloudflare, "Cloudflare", "DNS + CDN + WAF + Reverse Proxy")
+
+    System_Boundary(s1, "Retag - Brechó Pricing") {
         Container(fe, "FrontEnd", "Next.js (App Router)", "UI, gerenciamento de sessão e consumo da API")
-        Container(be, "BackEnd API", "NestJS", "Auth, regras de precificacao e CRUD de itens")
+        Container(be, "BackEnd API", "NestJS", "Auth, regras de precificação e CRUD de itens")
         ContainerDb(db, "Banco de Dados", "MySQL", "users, items, guest_price_simulations")
     }
 
-    System_Ext(openai, "OpenAI Responses API", "Sugestao de preco e racional")
+    System_Ext(openai, "OpenAI Responses API", "Sugestão de preço e racional")
     System_Ext(google, "Google OAuth2", "Login social")
     System_Ext(resend, "Resend API", "Envio de email de reset")
 
-    Rel_D(user, fe, "Usa via navegador", "HTTPS")
-    Rel_D(fe, be, "Chama endpoints REST", "JSON/HTTPS + JWT")
+    Rel(user, cloudflare, "Acessa aplicação", "HTTPS")
+    Rel(cloudflare, fe, "Proxy para frontend", "HTTPS")
+    Rel(cloudflare, be, "Proxy para API", "HTTPS")
 
-    Rel_L(be, db, "Le e escreve dados", "Knex/SQL")
-    Rel_R(be, openai, "Solicita sugestao de preco", "HTTPS")
-    Rel_R(be, google, "Processa OAuth", "OAuth2")
-    Rel_R(be, resend, "Envia recuperacao", "HTTPS")
+    Rel(fe, be, "Chama endpoints REST", "JSON/HTTPS + JWT")
+
+    Rel(be, db, "Lê e escreve dados", "Knex/SQL")
+    Rel(be, openai, "Solicita sugestão de preço", "HTTPS")
+    Rel(be, google, "Processa OAuth", "OAuth2")
+    Rel(be, resend, "Envia recuperação", "HTTPS")

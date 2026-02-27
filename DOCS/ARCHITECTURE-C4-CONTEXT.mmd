@@ -1,21 +1,28 @@
 ﻿C4Context
     title Retag - C4 Contexto
-    Person(user, "Usuario", "Pessoa que simula e gerencia precos de itens")
 
-    System_Boundary(s1, "Brecho Pricing") {
-        System(fe, "FrontEnd", "Next.js", "Interface web para simulacao e gestao")
-        System(be, "BackEnd API", "NestJS", "Autenticacao, precificacao e persistencia")
+    Person(user, "Usuário", "Pessoa que simula e gerencia preços de itens")
+
+    System_Ext(cloudflare, "Cloudflare", "Edge Proxy + DNS + Proteção DDoS")
+
+    System_Boundary(s1, "Retag - Brechó Pricing") {
+        System(fe, "FrontEnd", "Next.js", "Interface web para simulação e gestão")
+        System(be, "BackEnd API", "NestJS", "Autenticação, precificação e persistência")
     }
 
-    SystemDb(db, "MySQL", "Persistencia de usuarios, itens e simulacoes")
-    System_Ext(openai, "OpenAI Responses API", "Sugestao de preco e racional")
+    SystemDb(db, "MySQL", "Persistência de usuários, itens e simulações")
+
+    System_Ext(openai, "OpenAI Responses API", "Sugestão de preço e racional")
     System_Ext(google, "Google OAuth2", "Login social")
     System_Ext(resend, "Resend API", "Envio de email de reset")
 
-    Rel_D(user, fe, "Usa via navegador", "HTTPS")
-    Rel_D(fe, be, "Consome API", "JSON/HTTPS + JWT")
+    Rel(user, cloudflare, "Acessa aplicação", "HTTPS")
+    Rel(cloudflare, fe, "Proxy reverso para frontend", "HTTPS")
+    Rel(cloudflare, be, "Proxy reverso para API", "HTTPS")
 
-    Rel_L(be, db, "Le e escreve dados", "SQL")
-    Rel_R(be, openai, "Solicita sugestao de preco", "HTTPS")
-    Rel_R(be, google, "Processa OAuth", "OAuth2")
-    Rel_R(be, resend, "Envia recuperacao de senha", "HTTPS")
+    Rel(fe, be, "Consome API", "JSON/HTTPS + JWT")
+
+    Rel(be, db, "Lê e escreve dados", "SQL")
+    Rel(be, openai, "Solicita sugestão de preço", "HTTPS")
+    Rel(be, google, "Processa OAuth", "OAuth2")
+    Rel(be, resend, "Envia recuperação de senha", "HTTPS")

@@ -10,6 +10,14 @@ Objetivo do sistema:
 - Permitir salvar, listar, editar, excluir e marcar itens como vendidos.
 - Suportar usuários autenticados e uma simulação limitada para visitantes.
 
+Este sistema utiliza uma camada de Edge (Cloudflare) na frente das aplicações públicas, responsável por:
+
+- Terminação TLS (SSL)
+- Proteção contra DDoS
+- Rate limiting em endpoints sensíveis
+- Mitigação básica de bots
+- Proxy reverso para FrontEnd e BackEnd
+
 ## 2. Modelo Arquitetural (C4)
 ### 2.1 Context Diagram
 - Arquivo: `DOCS/ARCHITECTURE-C4-CONTEXT.mmd`

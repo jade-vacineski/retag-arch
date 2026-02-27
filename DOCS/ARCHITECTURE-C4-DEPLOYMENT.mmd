@@ -5,6 +5,10 @@
         Container(client, "Next.js App (Client)", "Next.js + React", "Executado no navegador")
     }
 
+    Deployment_Node(cloudflare, "Cloudflare Edge", "DNS + CDN + WAF + Proxy", "Camada de Edge e Segurança") {
+        Container(cf_proxy, "Reverse Proxy", "Cloudflare", "Terminação TLS, DDoS protection, Rate limiting")
+    }
+
     Deployment_Node(vercel, "Vercel", "Edge Network + Serverless", "Hospedagem do FrontEnd") {
         Container(fe, "Frontend", "Next.js + React + TypeScript", "Entrega da aplicação web")
     }
@@ -13,15 +17,17 @@
         Container(be, "Backend API", "NestJS", "API REST e regras de negócio")
     }
 
-    Deployment_Node(gcp, "Google Cloud", "Managed Infrastructure", "Camada de dados") {
-        ContainerDb(db, "MySQL Database", "MySQL (Cloud Managed)", "Persistência relacional")
+    Deployment_Node(railway, "Railway", "Managed MySQL", "Camada de dados") {
+        ContainerDb(db, "MySQL Database", "MySQL (Managed)", "Persistência relacional")
     }
 
     System_Ext(openai, "OpenAI API", "IA para sugestão de preço")
     System_Ext(google, "Google OAuth2", "Autenticação social")
     System_Ext(resend, "Resend API", "Envio de e-mails")
 
-    Rel(client, fe, "HTTPS")
+    Rel(client, cf_proxy, "HTTPS")
+    Rel(cf_proxy, fe, "HTTPS (Proxy)")
+    Rel(cf_proxy, be, "HTTPS (Proxy para api.retaglab.com.br)")
     Rel(fe, be, "HTTPS (REST + JWT)")
     Rel(be, db, "SSL/TCP 3306")
     Rel(be, openai, "HTTPS")
